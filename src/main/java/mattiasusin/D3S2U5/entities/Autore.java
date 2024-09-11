@@ -1,11 +1,9 @@
 package mattiasusin.D3S2U5.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Autore {
+
+    @OneToMany
+    @JoinColumn(name = "blog_post_id")
+    private List<BlogPost> blogPosts;
 
     @Id
     @GeneratedValue

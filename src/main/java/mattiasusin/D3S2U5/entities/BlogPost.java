@@ -1,9 +1,6 @@
 package mattiasusin.D3S2U5.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 @Entity
 @Table(name = "blogPosts")
@@ -12,6 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlogPost {
+
+    @ManyToOne
+    @JoinColumn(name = "autore_id")
+    private Autore autore;
 
     @Id
     @GeneratedValue
