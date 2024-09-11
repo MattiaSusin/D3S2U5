@@ -16,7 +16,7 @@ public class AutoriController {
     private AutoreService autoreService;
 
     // 1. GET TUTTI --> http://localhost:3001/autori
-    @GetMapping
+    @GetMapping()
     private List<Autore> getAllAutori() {
         return autoreService.findAll();
     }
@@ -29,7 +29,7 @@ public class AutoriController {
     }
 
     // 3. POST CREA UN NUOVO AUTORE -->  http://localhost:3001/autori (+ body)
-    @PostMapping
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201 CREATED
     private Autore createAutore(@RequestBody Autore body) {
         return autoreService.saveAutore(body);

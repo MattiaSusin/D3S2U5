@@ -2,6 +2,8 @@ package mattiasusin.D3S2U5.services;
 
 import mattiasusin.D3S2U5.entities.Autore;
 import mattiasusin.D3S2U5.exceptions.NotFoundException;
+import mattiasusin.D3S2U5.repositories.AutoreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,57 +12,38 @@ import java.util.Random;
 
 @Service
 public class AutoreService {
-    private List<Autore> autoreList = new ArrayList<>();
 
-    // 1. TROVA TUTTI
+    @Autowired
+    private AutoreRepository autoreRepository;
+
+    // Restituisce tutti gli autori
     public List<Autore> findAll() {
-        return this.autoreList;
+        return autoreRepository.findAll();
     }
 
-    // 2. TROVA CON ID
-    public Autore findById(int autoreId) throws ClassNotFoundException {
-        Autore found = null;
-        for (Autore autore : this.autoreList) if (autore.getId() == autoreId) found = autore;
-        if (found == null) throw new ClassNotFoundException();
-        return found;
-
-    }
-
-    // 3. CREA
+    // Salvataggio creazione
     public Autore saveAutore(Autore body) {
-        Random rd = new Random();
-        body.setId(rd.nextInt(1, 100));
-        body.setEmail(rd.toString());
-        body.setAvatar(rd.toString());
-        body.setDataDiNascita(rd.nextInt());
-        this.autoreList.add(body);
-        return body;
+        body.setAvatar("https://ui-avatars.com/api/?name=" + body.getNome() + "+" + body.getCognome());
+        return autoreRepository.save(body);
     }
 
-    // 4. TROVA CON ID E MODIFICA
-    public Autore findByIdAndUpdate(int autoreId, Autore updateAutore) {
-        Autore found = null;
-        for (Autore autore : this.autoreList) {
-            if (autore.getId() == autoreId) {
-                found = autore;
-                found.setNome(updateAutore.getNome());
-                found.setCognome(updateAutore.getCognome());
-                found.setEmail(updateAutore.getEmail());
-                found.setDataDiNascita(updateAutore.getDataDiNascita());
-                found.setAvatar(updateAutore.getAvatar());
-            }
-        }
-        if (found == null) throw new NotFoundException(autoreId);
-        return found;
+    // Trova tramite id
+    public Autore findById(int autoreId) {
+        return autoreRepository.findById(autoreId)
+                .orElseThrow(() -> new NotFoundException(autoreId));
     }
 
-    // 5. DELETE
+    // Trova tramite id e modifica
+    public Autore findByIdAndUpdate(int autoreId, Autore updatedAutore) {
+        Autore found = findById(autoreId);
+        found.setNome(updatedAutore.getNome());
+        found.setCognome(updatedAutore.getCognome());
+        return autoreRepository.save(found);
+    }
+
+    // Trova tramite id e elimina
     public void findByIdAndDelete(int autoreId) {
-        Autore found = null;
-        for (Autore autore : this.autoreList) {
-            if (autore.getId() == autoreId) found = autore;
-        }
-        if (found == null) throw new NotFoundException(autoreId);
-        this.autoreList.remove(found);
+        Autore found = findById(autoreId);
+        autoreRepository.delete(found);
     }
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Autore extends mattiasusin.D3S2U5.entities.BlogPost {
+public class Autore {
 
     @Id
     @GeneratedValue
