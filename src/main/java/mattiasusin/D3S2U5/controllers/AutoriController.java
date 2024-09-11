@@ -1,7 +1,7 @@
 package mattiasusin.D3S2U5.controllers;
 
-import mattiasusin.D2S2U5.entities.Autore;
-import mattiasusin.D2S2U5.services.AutoreService;
+import mattiasusin.D3S2U5.entities.Autore;
+import mattiasusin.D3S2U5.services.AutoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

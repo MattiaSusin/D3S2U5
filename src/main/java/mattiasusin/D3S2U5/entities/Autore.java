@@ -1,17 +1,23 @@
-package mattiasusin.D2S2U5.entities;
+package mattiasusin.D3S2U5.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
 
+import java.util.UUID;
+
+@Entity
+@Table(name = "autori")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Autore extends BlogPost {
+public class Autore extends mattiasusin.D3S2U5.entities.BlogPost {
 
-
+    @Id
+    @GeneratedValue
     private int id;
     private String nome;
     private String cognome;

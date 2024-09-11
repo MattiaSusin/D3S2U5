@@ -1,15 +1,16 @@
-package mattiasusin.D2S2U5.entities;
+package mattiasusin.D3S2U5.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlogPost {
+    @Id
+    @GeneratedValue
     private int id;
     private String categoria;
     private String titolo;
